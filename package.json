@@ -1,0 +1,19 @@
+{
+  "name": "diagramar",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web application to create Entity-Relationship Diagrams (ER)",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev:front": "npm run dev --workspace=frontend",
+    "dev:back": "npm run dev --workspace=backend",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=backend"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
