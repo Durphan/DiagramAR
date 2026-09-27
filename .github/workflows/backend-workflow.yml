@@ -36,6 +36,8 @@ jobs:
         run: npm ci --include=dev
       - name: Run linter
         run: npm run lint
+      - name: Run audit
+        run: npm audit --audit-level=moderate
       - name: Check if backend has tests
         id: check-tests
         run: |
