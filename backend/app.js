@@ -1,23 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
+const express = require("express");
 
-const routes = require('./src/routes');
-const notFound = require('./src/middlewares/notFound');
-const errorHandler = require('./src/middlewares/errorHandler');
+const authRoutes = require("./src/routes/auth.routes");
 
 const app = express();
 
-app.use(helmet());
-app.use(cors());
-app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.use('/api', routes);
-
-app.use(notFound);
-app.use(errorHandler);
+app.use("/auth", authRoutes);
 
 module.exports = app;
