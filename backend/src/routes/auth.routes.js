@@ -1,14 +1,9 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const { registerUser } = require("../controllers/auth.controllers");
-const { verificarUsuarioExistente } = require("../middlewares/verificarUsuarioExistente");
+const { registerUser } = require('../controllers/auth.controllers');
+const { validarRegistro } = require('../middlewares/validarRegistro');
 
-
-router.post(
-  "/register",
-  verificarUsuarioExistente,
-  registerUser
-);
+router.post('/register', validarRegistro, registerUser);
 
 module.exports = router;
