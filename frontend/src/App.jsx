@@ -2,6 +2,7 @@ import { useState } from 'react'
 import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import MiFlujo from './MiFlujo';
 import './App.css'
 
 function App() {
@@ -28,6 +29,8 @@ function App() {
         >
           Count is {count}
         </button>
+        <h2>Mi Diagrama Interactivo</h2>
+        <MiFlujo />
       </section>
 
       <div className="ticks"></div>
