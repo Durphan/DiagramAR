@@ -1,8 +1,8 @@
 const { register } = require('../services/auth.service');
 
-const registerUser = async (req, res, next) => {
-  const { username, password } = req.body;
+const registerUser = async (req, res) => {
   try {
+    const { username, password } = req.body;
     const user = await register(username, password);
 
     res.status(201).json({
@@ -10,10 +10,7 @@ const registerUser = async (req, res, next) => {
       usuarioId: user.id,
     });
   } catch (error) {
-    if (error.message === `El usuario ${username} ya existe en el sistema`){
-      error.statusCode = 409
-    }
-    next(error)
+    res.status(error.status).json({ message: error.message });
   }
 };
 
