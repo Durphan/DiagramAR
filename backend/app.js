@@ -1,12 +1,16 @@
-const express = require("express");
+const express = require('express');
 
-const usersRoutes = require("./src/routes/users.routes");
+const usersRoutes = require('./src/routes/users.routes');
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/users", usersRoutes);
+app.use('/users', usersRoutes);
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
