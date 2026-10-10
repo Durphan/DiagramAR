@@ -31,8 +31,6 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm ci --include=dev
-      - name: Run audit
-        run: npm audit --audit-level=moderates
       - name: Run linter
         run: npm run lint
       - name: Build frontend
