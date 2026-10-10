@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const userRepository = require('../repositories/user.repository');
 
 const ensureUsernameIsAvailable = async (username) => {
@@ -16,4 +17,27 @@ const register = async (username, password) => {
   return userRepository.createUser(username, passwordHash);
 };
 
-module.exports = { register };
+const login = async (username, password) => {
+  const user = await userRepository.findByUsername(username);
+  const correctPassword = await bcrypt.compare(password, user.password);
+
+  if (!user || !correctPassword) {
+    const error = new Error('Usuario o contraseña incorrectos');
+    throw error;
+  }
+
+  const token = jwt.sign(
+    {
+      usuarioId: user.id,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '15m' }
+  );
+
+  return { token: token };
+};
+
+module.exports = {
+  register,
+  login,
+};
