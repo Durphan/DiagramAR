@@ -4,4 +4,4 @@ logs/*.log
 dist/
 coverage/
 .DS_Store
-data/
+/data

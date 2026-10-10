@@ -11,9 +11,13 @@
     "dev:front": "npm run dev --workspace=frontend",
     "dev:back": "npm run dev --workspace=backend",
     "build": "npm run build --workspace=frontend",
-    "start": "npm run start --workspace=backend"
+    "start": "npm run start --workspace=backend",
+    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "allowScripts": {
+    "sqlite3": true
   }
 }
