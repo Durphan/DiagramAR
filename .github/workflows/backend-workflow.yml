@@ -1,0 +1,67 @@
+name: backend-workflow
+on:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d test_db -h localhost"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Node 24
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: "npm"
+          cache-dependency-path: ./backend/package-lock.json
+      - name: Install dependencies
+        run: npm ci --include=dev
+      - name: Run linter
+        run: npm run lint
+      - name: Check if backend has tests
+        id: check-tests
+        run: |
+          if [ -d "tests" ] && [ "$(ls -A tests)" ]; then
+            echo "Tests directory exists and is not empty."
+            echo "has_tests=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tests directory does not exist or is empty."
+            echo "has_tests=false" >> $GITHUB_OUTPUT
+          fi
+      - name: Run tests if exists
+        if: steps.check-tests.outputs.has_tests == 'true'
+        run: npm test
+      - name: Run backend server
+        run: npm start &
+      - name: Wait for backend server to be ready
+        run: |
+          for i in {1..30}; do
+            if nc -z localhost 3000; then
+              echo "Backend server is ready."
+              exit 0
+            fi
+            echo "Waiting for backend server to be ready..."
+            sleep 2
+          done
+          echo "Backend server did not become ready in time."
+    env:
+      NODE_ENV: production
+      PORT: 3000
