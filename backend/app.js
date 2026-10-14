@@ -1,6 +1,7 @@
 const express = require('express');
 
 const usersRoutes = require('./src/routes/users.routes');
+const errorHandler = require('./src/middlewares/errorHandler');
 
 const app = express();
 
@@ -12,10 +13,6 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
-
-app.use(errorHandler)
+app.use(errorHandler);
 
 module.exports = app;
