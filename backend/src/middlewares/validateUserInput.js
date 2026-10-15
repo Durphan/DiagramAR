@@ -1,14 +1,31 @@
-const { registerSchema } = require('../schemas/user.schema');
 const logger = require('../utils/logger');
+const ValidationError = require('../errors/validationError');
 
-const validateUserInput = (req, res, next) => {
-  const { error } = registerSchema.validate(req.body);
-  
-  if (error) {  
-    logger.error('Error de validación:', error);
-    return res.status(400).json({ error: error.details[0].message });
-  }
-  return next();
+
+
+const validateBodyInput = (schema) => {
+  return (req, res, next) => {
+    const { error } = schema.validate(req.body);
+    if (error) {
+      logger.error('Error de validación:', error);
+      throw new ValidationError(error.details[0].message);
+    }
+    return next();
+  };
 };
 
-module.exports = validateUserInput;
+const validateParamsInput = (schema) => {
+  return (req, res, next) => {
+    const { error } = schema.validate(req.params);
+    if (error) {
+      logger.error('Error de validación:', error);
+      throw new ValidationError(error.details[0].message);
+    }
+    return next();
+  };
+};
+
+module.exports = {
+  validateBodyInput,
+  validateParamsInput,
+};

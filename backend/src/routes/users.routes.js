@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const { registerUser } = require('../controllers/users.controllers');
-const validateUserInput = require('../middlewares/validateUserInput');
+const { validateBodyInput } = require('../middlewares/validateUserInput');
+const { registerSchema } = require('../schemas/user.schema');
 
-router.post('/', validateUserInput, registerUser);
+router.post('/', validateBodyInput(registerSchema), registerUser);
 
 module.exports = router;

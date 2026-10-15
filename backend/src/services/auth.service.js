@@ -1,13 +1,12 @@
 const bcrypt = require('bcryptjs');
 const userRepository = require('../repositories/user.repository');
+const ConflictError = require('../errors/ConflictError');
 
 const ensureUsernameIsAvailable = async (username) => {
   const existingUser = await userRepository.findByUsername(username);
 
   if (existingUser) {
-    const error = new Error(`El usuario ${username} ya existe en el sistema`);
-    error.statusCode = 409;
-    throw error;
+    throw new ConflictError(`Validation Error: El nombre de usuario "${username}" ya está en uso. Por favor, elige otro.`);
   }
 };
 
