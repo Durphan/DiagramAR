@@ -1,20 +1,15 @@
+const asyncHandler = require('../utils/asyncHandler');
 const { register } = require('../services/auth.service');
+const { CREATED } = require('../constants/httpStatus');
 
-const registerUser = async (req, res, next) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  try {
-    const user = await register(username, password);
 
-    res.status(201).json({
-      mensaje: 'Usuario creado correctamente',
-      usuarioId: user.id,
-    });
-  } catch (error) {
-    if (error.message === `El usuario ${username} ya existe en el sistema`){
-      error.statusCode = 409
-    }
-    next(error)
-  }
-};
+  const user = await register(username, password);
+  res.status(CREATED).json({
+    mensaje: 'Usuario creado correctamente',
+    usuarioId: user.id,
+  });
+});
 
 module.exports = { registerUser };

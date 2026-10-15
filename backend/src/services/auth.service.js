@@ -6,6 +6,7 @@ const ensureUsernameIsAvailable = async (username) => {
 
   if (existingUser) {
     const error = new Error(`El usuario ${username} ya existe en el sistema`);
+    error.statusCode = 409;
     throw error;
   }
 };
