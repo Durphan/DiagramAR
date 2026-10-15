@@ -1,8 +1,10 @@
-class NotAuthenticatedError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = "NotAuthenticatedError";
-    }
+const AppError = require('./AppError');
+const { UNAUTHORIZED } = require('../constants/httpStatus');
+
+class NotAuthenticatedError extends AppError {
+  constructor(message, code = 'NOT_AUTHENTICATED') {
+    super(message, UNAUTHORIZED, code);
+  }
 }
 
 module.exports = NotAuthenticatedError;

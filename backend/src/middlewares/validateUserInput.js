@@ -8,7 +8,7 @@ const validateBodyInput = (schema) => {
     const { error } = schema.validate(req.body);
     if (error) {
       logger.error('Error de validación:', error);
-      throw new ValidationError(error.details[0].message);
+      return next(new ValidationError(error.details[0].message));
     }
     return next();
   };
@@ -19,7 +19,7 @@ const validateParamsInput = (schema) => {
     const { error } = schema.validate(req.params);
     if (error) {
       logger.error('Error de validación:', error);
-      throw new ValidationError(error.details[0].message);
+      return next(new ValidationError(error.details[0].message));
     }
     return next();
   };
