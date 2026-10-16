@@ -22,6 +22,8 @@ jobs:
         run: npm ci --include=dev
       - name: Run linter
         run: npm run lint
+      - name: Run unit tests
+        run: npm test
     env:
       NODE_ENV: development
       PORT: 3000
