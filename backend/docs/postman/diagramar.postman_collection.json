@@ -1,252 +1,146 @@
 {
-  "info": {
-    "_postman_id": "985cbb98-a865-47d7-9812-886cd06a2311",
-    "name": "DiagramAR API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "54384044",
-    "_collection_link": "https://go.postman.co/collection/54384044-985cbb98-a865-47d7-9812-886cd06a2311?source=collection_link"
-  },
   "item": [
     {
-      "name": "Auth",
-      "item": [
+      "name": "Register a new user",
+      "request": {
+        "name": "Register a new user",
+        "description": {
+          "content": "Registers a new user account. Usernames are unique: a duplicate username fails with 409 Conflict.\n",
+          "type": "text/plain"
+        },
+        "url": { "raw": "{{baseUrl}}/users", "host": ["{{baseUrl}}"], "path": ["users"] },
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"demo_user\",\n  \"password\": \"secreto123\"\n}",
+          "options": { "raw": { "language": "json" } }
+        }
+      },
+      "response": [
         {
-          "name": "Register",
-          "request": {
+          "name": "User created successfully.",
+          "originalRequest": {
+            "url": { "path": ["users"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
             "method": "POST",
-            "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"username\": \"john\",\r\n  \"password\": \"1234\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/auth/register",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "3000",
-              "path": [
-                "auth",
-                "register"
-              ]
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"password\": \"secreto123\"\n}",
+              "options": { "raw": { "language": "json" } }
             }
           },
-          "response": [
-            {
-              "name": "Registro exitoso",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"username\": \"john\",\r\n  \"password\": \"1234\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://localhost:3000/auth/register",
-                  "protocol": "http",
-                  "host": [
-                    "localhost"
-                  ],
-                  "port": "3000",
-                  "path": [
-                    "auth",
-                    "register"
-                  ]
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "_postman_previewlanguage": "JSON",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express",
-                  "type": "text"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8",
-                  "type": "text"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "56",
-                  "type": "text"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"38-MKU0m1BiNZTnysLkdRXE1Y3pS9Y\"",
-                  "type": "text"
-                },
-                {
-                  "key": "Date",
-                  "value": "Sat, 03 Oct 2026 17:00:20 GMT",
-                  "type": "text"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive",
-                  "type": "text"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5",
-                  "type": "text"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"mensaje\": \"Usuario creado correctamente\",\n    \"usuarioId\": 1\n}"
-            },
-            {
-              "name": "Usuario duplicado",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"username\": \"john\",\r\n  \"password\": \"1234\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/auth/register",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "register"
-                  ]
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "_postman_previewlanguage": "JSON",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express",
-                  "type": "text"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8",
-                  "type": "text"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "53",
-                  "type": "text"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"35-fcP2zCfBQhkN3TJ4AY9xC8zaZDE\"",
-                  "type": "text"
-                },
-                {
-                  "key": "Date",
-                  "value": "Sat, 03 Oct 2026 17:11:40 GMT",
-                  "type": "text"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive",
-                  "type": "text"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5",
-                  "type": "text"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"mensaje\": \"el usuario john ya existe en el sistema\"\n}"
-            },
-            {
-              "name": "Username o password vacio",
-              "originalRequest": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"username\": \"\",\r\n  \"password\": \"1234\"\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "{{baseUrl}}/auth/register",
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "path": [
-                    "auth",
-                    "register"
-                  ]
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "_postman_previewlanguage": "JSON",
-              "header": [
-                {
-                  "key": "X-Powered-By",
-                  "value": "Express",
-                  "type": "text"
-                },
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8",
-                  "type": "text"
-                },
-                {
-                  "key": "Content-Length",
-                  "value": "52",
-                  "type": "text"
-                },
-                {
-                  "key": "ETag",
-                  "value": "W/\"34-AiqNjOibF2F3IKIzRgOWiQCM41I\"",
-                  "type": "text"
-                },
-                {
-                  "key": "Date",
-                  "value": "Sat, 03 Oct 2026 17:12:55 GMT",
-                  "type": "text"
-                },
-                {
-                  "key": "Connection",
-                  "value": "keep-alive",
-                  "type": "text"
-                },
-                {
-                  "key": "Keep-Alive",
-                  "value": "timeout=5",
-                  "type": "text"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n    \"mensaje\": \"Usuario y contraseña son obligatorios\"\n}"
+          "status": "Created",
+          "code": 201,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"mensaje\": \"Usuario creado correctamente\",\n  \"usuarioId\": 1\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "name": "Validation error. The body always uses the key `message`. The `stack` field appears only when NODE_ENV=development. The runtime also returns a `code` field (VALIDATION_ERROR), noted here as prose only.\n",
+          "originalRequest": {
+            "url": { "path": ["users"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"password\": \"secreto123\"\n}",
+              "options": { "raw": { "language": "json" } }
             }
-          ]
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"message\": \"El username es obligatorio\",\n  \"stack\": \"ValidationError: El username es obligatorio\\n    at src/middlewares/validateUserInput.js:11:19\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "name": "Username already exists. The runtime also returns a `code` field (CONFLICT), noted here as prose only.\n",
+          "originalRequest": {
+            "url": { "path": ["users"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"password\": \"secreto123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "status": "Conflict",
+          "code": 409,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"message\": \"Validation Error: El nombre de usuario \\\"demo_user\\\" ya está en uso. Por favor, elige otro.\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "name": "Unexpected server error. The runtime also returns a `code` field (INTERNAL_ERROR), noted here as prose only.\n",
+          "originalRequest": {
+            "url": { "path": ["users"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"demo_user\",\n  \"password\": \"secreto123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"message\": \"Internal server error\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
         }
-      ]
+      ],
+      "event": [],
+      "protocolProfileBehavior": { "disableBodyPruning": true }
+    },
+    {
+      "name": "Health check",
+      "request": {
+        "name": "Health check",
+        "description": { "content": "Returns the service health status.", "type": "text/plain" },
+        "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] },
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "name": "Service is healthy.",
+          "originalRequest": {
+            "url": { "path": ["health"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"status\": \"ok\"\n}",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": { "disableBodyPruning": true }
     }
-  ]
+  ],
+  "event": [],
+  "variable": [{ "type": "string", "value": "http://localhost:3000", "key": "baseUrl" }],
+  "info": {
+    "name": "DiagramAR API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "DiagramAR backend API. Note on response keys: successful responses use the runtime key `mensaje` while error responses use `message`. This inconsistency is real runtime behavior, not a documentation typo, and both keys are documented exactly as the API returns them.\n",
+      "type": "text/plain"
+    }
+  }
 }

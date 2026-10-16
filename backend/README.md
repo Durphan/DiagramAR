@@ -12,6 +12,8 @@ npm run dev
 
 Server starts on the port set in `.env` (default `5000`). Health check: `GET /api/health`.
 
+API docs (Swagger UI) are available at `GET /api-docs` only when `NODE_ENV=development`.
+
 ## Structure
 
 - `src/config` — env/config loading
