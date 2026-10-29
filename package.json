@@ -12,12 +12,20 @@
     "dev:back": "npm run dev --workspace=backend",
     "build": "npm run build --workspace=frontend",
     "start": "npm run start --workspace=backend",
-    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend"
+    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
+    "lint:staged": "lint-staged",
+    "prepare": "husky || true"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "allowScripts": {
-    "sqlite3": true
+    "sqlite3": true,
+    "better-sqlite3": true,
+    "@scarf/scarf@1.4.0": true
   }
 }

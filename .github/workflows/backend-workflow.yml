@@ -1,29 +1,42 @@
-name: backend-workflow
+name: Backend CI
+
 on:
   push:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-workflow.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-workflow.yml'
+
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./backend
+        working-directory: backend
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          fetch-depth: 0
-      - name: Set up Node 24
-        uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          cache: "npm"
-          cache-dependency-path: package-lock.json
-      - name: Install dependencies
-        run: npm ci --include=dev
-      - name: Run linter
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: 'backend/package-lock.json'
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
         run: npm run lint
-      - name: Run unit tests
+
+      - name: Build
+        run: npm run build
+
+      - name: Test
         run: npm test
-    env:
-      NODE_ENV: development
-      PORT: 3000

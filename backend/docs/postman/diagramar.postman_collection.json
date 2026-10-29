@@ -75,7 +75,7 @@
           "status": "Conflict",
           "code": 409,
           "header": [{ "key": "Content-Type", "value": "application/json" }],
-          "body": "{\n  \"message\": \"Validation Error: El nombre de usuario \\\"demo_user\\\" ya está en uso. Por favor, elige otro.\"\n}",
+          "body": "{\n  \"message\": \"Validation error: the username \\\"demo_user\\\" is already taken. Please choose another one.\"\n}",
           "cookie": [],
           "_postman_previewlanguage": "json"
         },
